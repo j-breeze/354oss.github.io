@@ -1,5 +1,5 @@
 //This tells Leaflet to connect to the tile service at the URL and display them on the map.
-var map = L.map("mapid")
+var map = L.map('map')
 
 var mapcenter = L.latLng([64.6431, -147.0638]);
 var zoomLevel = 13;
