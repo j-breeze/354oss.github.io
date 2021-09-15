@@ -1,2 +1,3 @@
 # 354 OSS/OSW Tools
-Cood.
+
+<https://j-breeze.github.io/354osw.github.io/weather/>
