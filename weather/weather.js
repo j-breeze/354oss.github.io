@@ -11,3 +11,4 @@ var OpenAIP = L.tileLayer('https://{s}.tile.maps.openaip.net/geowebcache/service
 	tms: true,
 	detectRetina: true,
 	subdomains: '12'
+});
