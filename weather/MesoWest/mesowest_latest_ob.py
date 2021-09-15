@@ -9,7 +9,7 @@
 #Note: noticed data coming from more than one station, e.g. KILROMEO4, AR794.
 
 from MesoPy import Meso # import `Meso()`
-m = Meso(token='a0fefe5d84dc40f0acadf7a787f47137') # pass API `token`
+m = Meso(token='7c0eab19bffc4221af1eaf73b4b1237e') # pass API `token`
 lat = m.latest(stid='PCKA2') # pass station ID, get `latest()` ob JSON data
 s = lat['STATION'][0]['STID'] # station ID
 s1 = lat['STATION'][0]['NAME'] # station name
