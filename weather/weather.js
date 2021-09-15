@@ -15,3 +15,5 @@ var baseMaps = {
 	"OpenAIP": aip,
 	"Stamen Terrain": stam
 };
+
+// MesoWest API key = 7c0eab19bffc4221af1eaf73b4b1237e
