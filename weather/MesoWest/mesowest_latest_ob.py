@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-#Copyright © 2018 nick3499@github
+#CC nick3499@github
 #Title ⟹ 'Current Weather Conditions: MesoPy (MesoWest API Wrapper)'
 #Hosted ⟹ https://github.com/nick3499/mesowest_latest_ob
 #ISC License (ISC) ⟹ https://opensource.org/licenses/ISC
