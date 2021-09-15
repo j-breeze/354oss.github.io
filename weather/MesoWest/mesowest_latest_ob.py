@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-'''
-Copyright © 2018 nick3499@github
-Title ⟹ 'Current Weather Conditions: MesoPy (MesoWest API Wrapper)'
-Hosted ⟹ https://github.com/nick3499/mesowest_latest_ob
-ISC License (ISC) ⟹ https://opensource.org/licenses/ISC
-MesoWest Python wrapper ⟹ https://github.com/mesowx/MesoPy
-API token required ⟹ https://synopticlabs.org/api/guides/?getstarted
-Note: noticed data coming from more than one station, e.g. KILROMEO4, AR794.
-'''
+
+#Copyright © 2018 nick3499@github
+#Title ⟹ 'Current Weather Conditions: MesoPy (MesoWest API Wrapper)'
+#Hosted ⟹ https://github.com/nick3499/mesowest_latest_ob
+#ISC License (ISC) ⟹ https://opensource.org/licenses/ISC
+#MesoWest Python wrapper ⟹ https://github.com/mesowx/MesoPy
+#API token required ⟹ https://synopticlabs.org/api/guides/?getstarted
+#Note: noticed data coming from more than one station, e.g. KILROMEO4, AR794.
 
 from MesoPy import Meso # import `Meso()`
 m = Meso(token='a0fefe5d84dc40f0acadf7a787f47137') # pass API `token`
