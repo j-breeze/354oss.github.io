@@ -2,7 +2,7 @@
 var map = L.map('map')
 
 var mapcenter = L.latLng([64.6431, -147.0638]);
-var zoomLevel = 13;
+var zoomLevel = 7;
 
 map.setView(mapcenter, zoomLevel);
 
