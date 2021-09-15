@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 #CC nick3499@github
 #Title ⟹ 'Current Weather Conditions: MesoPy (MesoWest API Wrapper)'
 #Hosted ⟹ https://github.com/nick3499/mesowest_latest_ob
