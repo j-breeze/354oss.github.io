@@ -3,13 +3,15 @@ var map = L.map('map').setView([64.666, -147.101], 8);
 var basemap = L.tileLayer.provider('Stamen.Terrain').addTo(map);
 
 //Hold markers group  
-var mesoMarkersGroup=new L.LayerGroup();   
-//Get weather information from Mesowest for the state VA  
+var mesoMarkersGroup=new L.LayerGroup();  
+
+//Get weather information from Mesowest for the state
+var tkn ="7c0eab19bffc4221af1eaf72b4b1237e"
 $.getJSON('https://api.synopticdata.com/v2/stations/latest',  
      {  
           state:'ak',                   
           latestobs:1,  
-          token:'7c0eab19bffc4221af1eaf73b4b1237e'  
+          token:tkn  
      },   
      function (data)   
      {  //Loop through all the weather stations  
