@@ -25,7 +25,7 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?',
      {  
           state:'ak',                   
           latestobs:1,  
-          token:'7c0eab19bffc4221af1eaf73b4b1237e'  
+          token:"7c0eab19bffc4221af1eaf73b4b1237e"  
      },   
      function (data)   
      {  //Loop through all the weather stations  
