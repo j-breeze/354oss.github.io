@@ -3,12 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>354 OSS ECT Tool</title>
-	<!-- This is the sets up the webpage dimensions, etc. -->
+    <!-- The following pulls a CSS file for Leaflet from a free host -->
+    <link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet">
     <link href="weather.css" rel="stylesheet">
   </head>
   <body>
     <div id="map"></div>
-    <script src="weather.py"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Pulls Leaflet script -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Library with some shortcuts for JS code; using it to fetch GeoJSON data -->
+    <script src="leaflet-providers.js"></script>
+    <!-- Script for the MOA areas, from Leaflet-providers -->
+    <script src="weather.js"></script>
     <!-- Custom script for the map -->
   </body>
 </html>
