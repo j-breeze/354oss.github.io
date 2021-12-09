@@ -1,3 +1,7 @@
+//The Map!
+var map = L.map('map').setView([64.666, -147.101], 8);
+var basemap = L.tileLayer.provider('Stamen.Terrain').addTo(map);
+
 //Hold markers group  
 var mesoMarkersGroup=new L.LayerGroup();   
 //Get weather information from Mesowest for the state VA  
