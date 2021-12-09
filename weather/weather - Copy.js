@@ -22,7 +22,7 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest',
           {  
            try{  
                 var stn = data.STATION[i];  
-                var dat = stn.OBSERVATIONS;  
+                //var dat = stn.OBSERVATIONS;  
                 var stnInfo = stn.NAME.toUpperCase();  
                 //var elev=parseInt(stn.ELEVATION);            
                 //stnInfo = "<b>Air Temp:&nbsp;</b>"+Math.round(dat.air_temp[1])+"&deg;F"+ "</br><b>Wind Speed:&nbsp;</b>"+Math.round(dat.wind_speed[1]* 1.150)+"MPH"+"</br>  
@@ -35,8 +35,8 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest',
            {  
                alert("Error! "+ e);  
            }  
-          }   
- })       
+     }   
+})       
 .done(function()  
 {  
 })  
