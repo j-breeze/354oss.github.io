@@ -11,7 +11,7 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
 	for(var i=0;i<data.STATION.length;i++) {
 		var stn = data.STATION[i];
 		var stnInfo = stn.NAME.toUpperCase();
-		var circle = L.circle([64.666, -147.101], {
+		var circle = L.circle(L.latLng(stn.LATITUDE, stn.LONGITUDE), {
      			color:'black',
 	   		fillColor:'#f03',
 	    		fillOpacity:0.35,
