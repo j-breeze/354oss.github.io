@@ -1,11 +1,20 @@
 //The Map!
 var map = L.map('map').setView([64.666, -147.101], 8);
 var basemap = L.tileLayer.provider('Stamen.Terrain').addTo(map);
+$.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af1eaf73b4b1237e&output=json&within=1440&obtimezone=utc&units=temp|f,speed|mph&stid=PAEI',
+  {
+    // request parameters
+  },
+  function (data)
+  {
+    //do something with data here
+  }
+);
 var circle = L.circle([64.666, -147.101], {
-										 color:'blue',
-										 fillColor:'#f03',
-										 fillOpacity:0.35,
-										 radius:500
+  color:'black',
+	fillColor:'#f03',
+	fillOpacity:0.35,
+	radius:5000
 }).addTo(map);
 
 //Hold markers group  
