@@ -16,7 +16,7 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
 	   		fillColor:'#f03',
 	    		fillOpacity:0.35,
 	 		radius:5000
-     		}).addTo(map).bindPopup('Help');
+     		}).addTo(map).bindPopup('Help!!!');
 	}
   }
 );
