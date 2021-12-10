@@ -15,7 +15,7 @@ var circle = L.circle([64.666, -147.101], {
 	fillColor:'#f03',
 	fillOpacity:0.35,
 	radius:5000
-}).addTo(map).bindPopup('');
+}).addTo(map).bindPopup('Help');
 
 //Hold markers group  
 //var mesoMarkersGroup=new L.LayerGroup();  
