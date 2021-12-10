@@ -8,14 +8,15 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
   function (data)
   {
     //do something with data here
+	  var circle = L.circle([64.666, -147.101], {
+      color:'black',
+	    fillColor:'#f03',
+	    fillOpacity:0.35,
+	    radius:5000
+     }).addTo(map).bindPopup('Help');
   }
 );
-var circle = L.circle([64.666, -147.101], {
-  color:'black',
-	fillColor:'#f03',
-	fillOpacity:0.35,
-	radius:5000
-}).addTo(map).bindPopup('Help');
+
 
 //Hold markers group  
 //var mesoMarkersGroup=new L.LayerGroup();  
