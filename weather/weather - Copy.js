@@ -1,6 +1,12 @@
 //The Map!
 var map = L.map('map').setView([64.666, -147.101], 8);
 var basemap = L.tileLayer.provider('Stamen.Terrain').addTo(map);
+var circle = L.circle([64.666, -147.101], {
+										 color:'blue',
+										 fillColor:'#f03',
+										 fillOpacity:0.35,
+										 radius:500
+}).addTo(map);
 
 //Hold markers group  
 //var mesoMarkersGroup=new L.LayerGroup();  
