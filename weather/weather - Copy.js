@@ -8,12 +8,16 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
   function (data)
   {
     //do something with data here
-	  var circle = L.circle([64.666, -147.101], {
-      color:'black',
-	    fillColor:'#f03',
-	    fillOpacity:0.35,
-	    radius:5000
-     }).addTo(map).bindPopup('Help');
+	for(var i=0;i<data.STATION.length;i++) {
+		var stn = data.STATION[i];
+		var stnInfo = stn.NAME.toUpperCase();
+		var circle = L.circle([64.666, -147.101], {
+     			color:'black',
+	   		fillColor:'#f03',
+	    		fillOpacity:0.35,
+	 		radius:5000
+     		}).addTo(map).bindPopup('Help');
+	}
   }
 );
 
