@@ -14,7 +14,7 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
 		var stn = data.STATION[i];
 		var obs = stn.OBSERVATIONS;
 		var stnInfo = stn.NAME.toUpperCase();
-		stnINFO = obs.air_temp_value_1
+		stnINFO = obs.air_temp_value_1;
 		var circle = L.circle(L.latLng(stn.LATITUDE, stn.LONGITUDE), {
      			color:'black',
 	   		fillColor:'#f03',
