@@ -13,7 +13,6 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
 	for(var i=0;i<data.STATION.length;i++) {
 		var stn = data.STATION[i];
 		var stnInfo = stn.NAME.toUpperCase();
-		var ECT = stn.wind_chill();
 		var circle = L.circle(L.latLng(stn.LATITUDE, stn.LONGITUDE), {
      			color:'black',
 	   		fillColor:'#f03',
