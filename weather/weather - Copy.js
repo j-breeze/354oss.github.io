@@ -13,12 +13,13 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
 	for(var i=0;i<data.STATION.length;i++) {
 		var stn = data.STATION[i];
 		var stnInfo = stn.NAME.toUpperCase();
+		var ECT = stn.wind_chill();
 		var circle = L.circle(L.latLng(stn.LATITUDE, stn.LONGITUDE), {
      			color:'black',
 	   		fillColor:'#f03',
 	    		fillOpacity:1.00,
 	 		radius:5000
-     		}).addTo(map).bindPopup(stnInfo);
+     		}).addTo(map).bindPopup(stnInfo+ECT);
 	}
   }
 );
@@ -28,14 +29,14 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
 //          {  
 //           try{  
 //                var stn = data.STATION[i];  
-//                //var dat = stn.OBSERVATIONS;  
+//                var dat = stn.OBSERVATIONS;  
 //                var stnInfo = stn.NAME.toUpperCase();  
-                //var elev=parseInt(stn.ELEVATION);            
-                //stnInfo = "<b>Air Temp:&nbsp;</b>"+Math.round(dat.air_temp[1])+"&deg;F"+ "</br><b>Wind Speed:&nbsp;</b>"+Math.round(dat.wind_speed[1]* 1.150)+"MPH"+"</br>  
-                //+<b>Wind Direction:&nbsp;</b>"+getCardinalDirection(Math.round(dat.wind_direction[1]))+"</br><b>Relative Humidity:&nbsp;</b>"+dat.relative_humidity[1]+"%"+"</br>  
-                //+<b>Elevation:&nbsp;</b>"+elev+"&prime;";       
-                //Add stations into Leaflet markers group  
-//                L.marker(L.latLng(stn.LATITUDE,stn.LONGITUDE),{title:stn.NAME.toUpperCase()}).bindPopup(stnInfo).addTo(mesoMarkersGroup);  
+//                var elev=parseInt(stn.ELEVATION);            
+//                stnInfo = "<b>Air Temp:&nbsp;</b>"+Math.round(dat.air_temp[1])+"&deg;F"+ "</br><b>Wind Speed:&nbsp;</b>"+Math.round(dat.wind_speed[1]* 1.150)+"MPH"+"</br>  
+//                +<b>Wind Direction:&nbsp;</b>"+getCardinalDirection(Math.round(dat.wind_direction[1]))+"</br><b>Relative Humidity:&nbsp;</b>"+dat.relative_humidity[1]+"%"+"</br>  
+//                +<b>Elevation:&nbsp;</b>"+elev+"&prime;";       
+//                //Add stations into Leaflet markers group  
+//                L.marker(L.latLng(stn.LATITUDE,stn.LONGITUDE),{title:stn.NAME.toUpperCase()}).bindPopup(stnInfo).addTo(MarkerGroup);  
 //           }    
 //           catch(e)  
 //           {  
@@ -48,8 +49,8 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
 //})  
 //.fail(function()  
 //{       
-//     alert("Could not access the MesoWest!");  
+//     alert("!");  
 //});  
 //Add markers group to the Map  
-//map.addLayer(mesoMarkersGroup);  
+//map.addLayer(MarkerGroup);  
 
