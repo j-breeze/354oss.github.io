@@ -1,7 +1,7 @@
 //The Map!
 var map = L.map('map').setView([64.666, -147.101], 8);
 var basemap = L.tileLayer.provider('Stamen.Terrain').addTo(map);
-$.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af1eaf73b4b1237e&output=json&within=1440&obtimezone=utc&units=temp|f,speed|mph&stid=PAEI',
+$.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af1eaf73b4b1237e&obtimezone=utc&output=json&units=english&status=active&varsoperator=and&state=AK&within=1440',
   {
     // request parameters
   },
@@ -16,7 +16,7 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
 	   		fillColor:'#f03',
 	    		fillOpacity:0.35,
 	 		radius:5000
-     		}).addTo(map).bindPopup('Help!!!');
+     		}).addTo(map).bindPopup(stnInfo);
 	}
   }
 );
