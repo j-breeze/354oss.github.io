@@ -1,22 +1,25 @@
-//The Map!
+//The Map! This centers the view on Eielson and makes it full-screen.
 var map = L.map('map').setView([64.666, -147.101], 8);
+//This is the basemap. Used a sleek terrain with minimal other info. Loads faster than pure satellite imagery.
 var basemap = L.tileLayer.provider('Stamen.Terrain').addTo(map);
+//This is what actually pulls the weather station data in from Syntoptic Data (who owns MesoWest). See https://developers.synopticdata.com/mesonet !
 $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af1eaf73b4b1237e&obtimezone=utc&output=json&units=english&status=active&varsoperator=and&state=AK&within=1440',
   {
-    // request parameters
+    // request parameters for synoptic data, but can keep it blank since the parameters are in the URL above
   },
   function (data)
   {
-    //do something with data here
+    //This is where we do the markers. See https://leafletjs.com/examples.html
 	for(var i=0;i<data.STATION.length;i++) {
 		var stn = data.STATION[i];
 		var stnInfo = stn.NAME.toUpperCase();
+		var ECT = stn.wind_chill();
 		var circle = L.circle(L.latLng(stn.LATITUDE, stn.LONGITUDE), {
      			color:'black',
 	   		fillColor:'#f03',
-	    		fillOpacity:0.35,
+	    		fillOpacity:1.00,
 	 		radius:5000
-     		}).addTo(map).bindPopup(stnInfo);
+     		}).addTo(map).bindPopup(stnInfo+' '+ECT);
 	}
   }
 );
