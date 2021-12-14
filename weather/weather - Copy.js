@@ -12,14 +12,15 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
     //This is where we do the markers. See https://leafletjs.com/examples.html
 	for(var i=0;i<data.STATION.length;i++) {
 		var stn = data.STATION[i];
+		var obs = stn.OBSERVATIONS;
 		var stnInfo = stn.NAME.toUpperCase();
-		var ECT = stn.wind_chill();
+		stnINFO = obs.air_temp_value_1
 		var circle = L.circle(L.latLng(stn.LATITUDE, stn.LONGITUDE), {
      			color:'black',
 	   		fillColor:'#f03',
 	    		fillOpacity:1.00,
 	 		radius:5000
-     		}).addTo(map).bindPopup(stnInfo+ECT);
+     		}).addTo(map).bindPopup(stnInfo);
 	}
   }
 );
