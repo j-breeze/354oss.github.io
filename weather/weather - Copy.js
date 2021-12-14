@@ -24,22 +24,6 @@ $.getJSON('https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc42
   }
 );
 
-
-//Hold markers group  
-//var mesoMarkersGroup=new L.LayerGroup();  
-
-//Get weather information from Mesowest for the state
-//var tkn ="7c0eab19bffc4221af1eaf73b4b1237e"
-//$.getJSON('https://api.synopticdata.com/v2/stations/latest',  
-//     {  
-//          within:1440,
-//          obtimezone:'utc',
-//          units:'english'
-//          stid:'PAEI',
-//          latestobs:1,  
-//          token:tkn
-//     },   
-//     function (data)   
 //     {  //Loop through all the weather stations  
 //       for(var i=0;i<data.STATION.length;i++)  
 //          {  
