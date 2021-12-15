@@ -9,7 +9,7 @@ var map = L.map('map', {
 	maxBounds:[[46.654,-200.941],[76.701,-120.231]]
 }).setView([64.666, -147.101], 8);
 
-//This is code for the tiles (the terrain map). Limited it to only load Alaska. Faster, saves data!
+//This is code for the tiles (the terrain map). Limited it to only load Alaska. Faster, saves data! :)
 var basemap = L.tileLayer.provider('Stamen.Terrain', {
 	bounds:[[46.654,-200.941],[76.701,-120.231]]
 }).addTo(map);
