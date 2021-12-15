@@ -35,6 +35,12 @@ fetch('Special_Use_Airspace.geojson')
 	.then(function(response2) {
 			return response2.json();
 	})
-	.then(function(data2) {
-		var moaLayer = L.geoJSON(data2).addTo(map);
-	});
+	.then(function moaStyle(data2) {
+		return {
+			fillcolor:'blue',
+			weight:2,
+			opacity:1,
+			color:'#0000FF',
+			fillOpacity:0.33
+		}
+	}).addTo(map);
