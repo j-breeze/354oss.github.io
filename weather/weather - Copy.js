@@ -55,7 +55,7 @@ var stnMarkerUkn = {
 	fillOpacity:1
 };
 
-let stnMarkerOptions;
+var stnMarkerOptions = {};
 
 //This is where the script pulls the data from Synoptic (parent company of MesoWest). The URL defines the parameters of what is pulled.
 //Typical format is &[parameter]=[thing]. For instance, &units=metric sets the returned unit values to metric.
@@ -69,6 +69,7 @@ fetch("https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af
 			//This loops through each feature and applies a popup with ECT information if wind > 2.6 kts 
 			//The equation doesnt work below that wind speed!
 			onEachFeature: function (feature, jsonLayer) {
+			
 				if (feature.properties.air_temp == null) {
 					var uECT = "Unknown!";
 				} else if (feature.properties.wind_speed == null ) {
@@ -94,45 +95,43 @@ fetch("https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af
 				jsonLayer.bindPopup("<h3>"+"Station: "+feature.properties.stid+"</h3>"+"ECT: "+uECT+"<br>"+"Air Temp: "+airtemp+"<br>"+"Wind Speed: "+windspeed);
 				
 				// This sets the coloring based on the ECT.
-				switch (true) {
-					case (uECT <= -50):
-						var stnMarkerOptions = stnMarkerWg;
-						break;
-					case (uECT <= -30):
-						var stnMarkerOptions = stnMarkerOG;
-						break;
-					case (uECT <= 0):
-						var stnMarkerOptions = stnMarkerBad;
-						break;
-					case (uECT > 0):
-						var stnMarkerOptions = stnMarkerGood;
-						break;
-					default:
-						var stnMarkerOptions = stnMarkerUkn
-						break;
+				if (uECT <= -50) {
+					var stnMarkerOptions = stnMarkerWg;
+				} else if (uECT <= -30) {
+					var stnMarkerOptions = stnMarkerOG;
+				} else if (uECT <= 0) {
+					var stnMarkerOptions = stnMarkerBad;
+				} else if (uECT > 0) {
+					var stnMarkerOptions = stnMarkerGood;
+				} else {
+					var stnMarkerOptions = stnMarkerUkn
 				};
 			},
 			//This tells the function to use the station marker options defined above.
-			pointToLayer: function (feature2, latlng) {
-				return L.circleMarker(latlng, stnMarkerOptions);	
+			pointToLayer: function (feature, latlng) {
+				return L.circleMarker(latlng, {stnMarkerOptions});	
 			}
 		}).addTo(map);
-	});
+	})
 
 //This defines the settings for the MOAs.
-var moaMarkerOptions = {
-	color:"red",
-	fillColor:"red",
-	fillOpacity:0
-};
+
 
 //This pulls the MOAs! Downloaded from the FAA ArcGIS page as a .geoJSON file: https://adds-faa.opendata.arcgis.com/ 
 fetch("Special_Use_Airspace.geojson")
 	.then(function(response) {
 		return response.json();
 	})
+	.then(function(setMoaStyle) {
+		return {
+			color:"red",
+			fillColor:"red",
+			fillOpacity:0
+		};
+	})	
 	.then(function(data) {
 		var moaLayer = L.geoJSON(data, {
+			style: setMoaStyle,
 			onEachFeature: function (feature, moaLayer) {
 				moaLayer.bindPopup("<h3>"+feature.properties.NAME+"</h3>");
 			}
