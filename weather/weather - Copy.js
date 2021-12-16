@@ -31,16 +31,10 @@ fetch("https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af
 	});
 	
 //This pulls the MOAs! Downloaded from the FAA ArcGIS page as a .geoJSON file: https://adds-faa.opendata.arcgis.com/ 
-fetch('Special_Use_Airspace.geojson')
-	.then(function(response2) {
-			return response2.json();
+fetch("Special_Use_Airspace.geojson")
+	.then(function(response) {
+		return response.json();
 	})
-	.then(function moaStyle(data2) {
-		return {
-			fillcolor:'blue',
-			weight:2,
-			opacity:1,
-			color:'#0000FF',
-			fillOpacity:0.33
-		}
-	}).addTo(map);
+	.then(function(data) {
+		L.geoJSON(data).addTo(map);
+	});
