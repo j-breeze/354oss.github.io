@@ -588,6 +588,28 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .leaflet-tooltip-right:before {
 	position: absolute;
 	pointer-events: none;
+	border: none;
+	background: transparent;
+	content: "";
+	}
+.ect-tooltip {
+	position: absolute;
+	background-color: transparent;
+	border: transparent;
+	box-shadow: none;
+	filter: invert(1);
+	mix-blend-mode: difference;
+	}
+.ect-tooltip.ect-clickable {
+	cursor: pointer;
+	pointer-events: auto;
+	}
+.ect-tooltip-top:before,
+.ect-tooltip-bottom:before,
+.ect-tooltip-left:before,
+.ect-tooltip-right:before {
+	position: absolute;
+	pointer-events: none;
 	border: 6px solid transparent;
 	background: transparent;
 	content: "";
