@@ -1,3 +1,3 @@
-# 354 OSS/OSW Tools
+# ECT Tools
 
-<https://j-breeze.github.io/354osw.github.io/weather/>
+<https://j-breeze.github.io/ECTTool.github.io/weather/>
