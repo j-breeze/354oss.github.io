@@ -4,11 +4,11 @@
 //Uses Stamen layers (see leaflet-providers.js for more layers). Only using Terrain and Toner for now. 
 //Some others are CONUS-only and others like watercolor don't always load well.
 var terrain = L.tileLayer.provider('Stamen.Terrain', {
-	bounds:[[46.654,-200.941],[76.701,-120.231]]
+	bounds:[[50,-200.941],[74,-127.231]]
 });
 
 var toner = L.tileLayer.provider('Stamen.Toner', {
-	bounds:[[46.654,-200.941],[76.701,-120.231]]
+	bounds:[[50,-200.941],[74,-127.231]]
 });
 
 //This sets the boundaries and zoom for the map. Limited it to Alaska.
@@ -19,7 +19,7 @@ var toner = L.tileLayer.provider('Stamen.Toner', {
 var map = L.map('map', {
 	maxZoom:12,
 	minZoom:5,
-	maxBounds:[[46.654,-200.941],[76.701,-120.231]],
+	maxBounds:[[46.654,-200.941],[76,-120.231]],
 	layers: [terrain]
 }).setView([64.666, -147.101], 8);
 
