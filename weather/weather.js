@@ -36,7 +36,7 @@ var layerControl = L.control.layers(baseLayers).addTo(map);
 //https://developers.synopticdata.com/mesonet/explorer/ lets you customize what the API delivers and gives you a custom URL automatically!
 //This link only allows 5,000 accesses per month for free, may need subscription? If data is not pulling, paste URL into web browser to see if appears.
 //The "token" is linked to my Synoptic account (jresenbeck) and unique. Needed to access data.
-fetch("https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af1eaf73b4b1237e&obtimezone=utc&output=geojson&units=english&status=active&varsoperator=and&state=AK&within=1440&units=english")
+fetch("https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af1eaf73b4b1237e&timeformat=%TZ%n/%n%d-%b-%Y&obtimezone=utc&output=geojson&units=english&status=active&varsoperator=and&state=AK&within=1440&units=english")
 	.then(function(response) {
 		return response.json();
 	})
@@ -81,7 +81,7 @@ fetch("https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af
 						iconSize: 30,
 				})};
 				
-				return L.marker(latlng, {icon: tempIcon}).bindPopup("<h3>"+"Station: "+feature.properties.stid+"</h3>"+"🌡Air Temp: "+Math.round(feature.properties.air_temp)+"°F"+"<br>"+"💨Wind Speed: "+Math.round(feature.properties.wind_speed)+" kts").addTo(map);
+				return L.marker(latlng, {icon: tempIcon}).bindPopup("<h3>"+"Station: "+feature.properties.stid+"</h3>"+"🕐Ob Time: "+feature.properties.date_time+"<br>"+"⛰️Elevation: "+feature.properties.elevation+" ft"+"<br>"+"🌡Air Temp: "+Math.round(feature.properties.air_temp)+"°F"+"<br>"+"💨Wind Speed: "+Math.round(feature.properties.wind_speed)+" kts").addTo(map);
 			}
 		}).addTo(map);
 	})
