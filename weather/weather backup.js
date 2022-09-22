@@ -36,54 +36,55 @@ var layerControl = L.control.layers(baseLayers).addTo(map);
 //https://developers.synopticdata.com/mesonet/explorer/ lets you customize what the API delivers and gives you a custom URL automatically!
 //This link only allows 5,000 accesses per month for free, may need subscription? If data is not pulling, paste URL into web browser to see if appears.
 //The "token" is linked to my Synoptic account (jresenbeck) and unique. Needed to access data.
-
-L.realtime({
-	url: 'https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af1eaf73b4b1237e&timeformat=%TZ%n/%n%d-%b-%Y&obtimezone=utc&output=geojson&units=english&status=active&varsoperator=and&state=AK&within=1440&units=english',
-	crossOrigin: true,
-	type: 'geojson',
-}, {
-	//This tells the function what to set the text labels and popups to, according to wind chill formula.
-	pointToLayer: function (feature, latlng) {
-		if (feature.properties.air_temp == null && feature.properties.wind_speed == null) {
-			var ECT = "Bad"
-		} else if (feature.properties.air_temp == null || feature.properties.wind_speed == null) {
-			var ECT = "NaN"
-		} else if (feature.properties.wind_speed >= 2.60693) {	
-			var ECT = Math.round(35.74+(0.6215*feature.properties.air_temp)-(35.75*(feature.properties.wind_speed**0.16))+(0.4275*feature.properties.air_temp*((feature.properties.wind_speed/1.15077944802)**0.16)));
-		} else {
-			var ECT = Math.round(feature.properties.air_temp);
-		};
-		
-		if (ECT == "Bad") {
-			var tempIcon = L.divIcon({
-				className: 'temp-icon-missing',
-				html: ECT,
-				iconSize: 0,
-		})} else if (ECT == "NaN") {
-			var tempIcon = L.divIcon({
-				className: 'temp-icon-warning',
-				html: "⚠️",
-				iconSize: 30,
-		})} else if (ECT > 0) {
-			var tempIcon = L.divIcon({
-				className: 'temp-icon-green',
-				html: ECT+"°F",
-				iconSize: 30,
-		})} else if (ECT > -30) {
-			var tempIcon = L.divIcon({
-				className: 'temp-icon-yellow',
-				html: ECT+"°F",
-				iconSize: 30,
-		})} else {
-			var tempIcon = L.divIcon({
-				className: 'temp-icon-red',
-				html: ECT+"°F",
-				iconSize: 30,
-		})};
-		
-		return L.marker(latlng, {icon: tempIcon}).bindPopup("<h3>"+"Station: "+feature.properties.stid+"</h3>"+"🕐Ob Time: "+feature.properties.date_time+"<br>"+"⛰️Elevation: "+feature.properties.elevation+" ft"+"<br>"+"🌡Air Temp: "+Math.round(feature.properties.air_temp)+"°F"+"<br>"+"💨Wind Speed: "+Math.round(feature.properties.wind_speed)+" kts").addTo(map);
-	}
-}).addTo(map);
+fetch("https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af1eaf73b4b1237e&timeformat=%TZ%n/%n%d-%b-%Y&obtimezone=utc&output=geojson&units=english&status=active&varsoperator=and&state=AK&within=1440&units=english")
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(data) {
+		L.geoJSON(data, {
+			//This tells the function what to set the text labels and popups to, according to wind chill formula.
+			pointToLayer: function (feature, latlng) {
+				if (feature.properties.air_temp == null && feature.properties.wind_speed == null) {
+					var ECT = "Bad"
+				} else if (feature.properties.air_temp == null || feature.properties.wind_speed == null) {
+					var ECT = "NaN"
+				} else if (feature.properties.wind_speed >= 2.60693) {	
+					var ECT = Math.round(35.74+(0.6215*feature.properties.air_temp)-(35.75*(feature.properties.wind_speed**0.16))+(0.4275*feature.properties.air_temp*((feature.properties.wind_speed/1.15077944802)**0.16)));
+				} else {
+					var ECT = Math.round(feature.properties.air_temp);
+				};
+				
+				if (ECT == "Bad") {
+					var tempIcon = L.divIcon({
+						className: 'temp-icon-missing',
+						html: ECT,
+						iconSize: 0,
+				})} else if (ECT == "NaN") {
+					var tempIcon = L.divIcon({
+						className: 'temp-icon-warning',
+						html: "⚠️",
+						iconSize: 30,
+				})} else if (ECT > 0) {
+					var tempIcon = L.divIcon({
+						className: 'temp-icon-green',
+						html: ECT+"°F",
+						iconSize: 30,
+				})} else if (ECT > -30) {
+					var tempIcon = L.divIcon({
+						className: 'temp-icon-yellow',
+						html: ECT+"°F",
+						iconSize: 30,
+				})} else {
+					var tempIcon = L.divIcon({
+						className: 'temp-icon-red',
+						html: ECT+"°F",
+						iconSize: 30,
+				})};
+				
+				return L.marker(latlng, {icon: tempIcon}).bindPopup("<h3>"+"Station: "+feature.properties.stid+"</h3>"+"🕐Ob Time: "+feature.properties.date_time+"<br>"+"⛰️Elevation: "+feature.properties.elevation+" ft"+"<br>"+"🌡Air Temp: "+Math.round(feature.properties.air_temp)+"°F"+"<br>"+"💨Wind Speed: "+Math.round(feature.properties.wind_speed)+" kts").addTo(map);
+			}
+		}).addTo(map);
+	})
 
 //This pulls the MOAs and styles them with red borders with no fill-in! Downloaded from the FAA ArcGIS page 
 //as a .geoJSON file: https://adds-faa.opendata.arcgis.com/ 
