@@ -150,7 +150,6 @@ L.realtime({
     	if (minECT[polygonId] === undefined || ECT < minECT[polygonId]) {
         	minECT[polygonId] = ECT;
     	}
-	
 	}
 });
 
@@ -186,6 +185,10 @@ try{
 		})
 		.then(function(data) {
 			L.geoJSON(data, {
+				style: {
+					color: 'red',
+					fillOpacity:0
+				},
 				onEachFeature: function (feature, moaLayer) {
 					moaLayer.bindPopup("<h3>"+feature.properties.NAME+"</h3>");
 				}
@@ -196,15 +199,15 @@ try{
 					var min = minECT[polygonId];
 					if (min !== undefined) {
 						if (min > 0) {
-							layer.setStyle({fillColor: 'green'});
+							layer.setStyle({color: 'green'});
 						} else if (min > -30) {
-							layer.setStyle({fillColor: 'yellow'});
+							layer.setStyle({color: 'yellow'});
 						} else {
-							layer.setStyle({fillColor: 'red'});
+							layer.setStyle({color: 'red'});
 						}
 					}
 				}
-});
+			});
 		});
 } catch (error) {
 	window.alert("Error: " + error.message);
