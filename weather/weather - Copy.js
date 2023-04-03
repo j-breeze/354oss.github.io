@@ -146,7 +146,7 @@ L.realtime({
 
 		};
 
-		var polygonId = feature.properties.polygon_id;
+		var polygonId = feature.properties.OBJECTID;
     	if (minECT[polygonId] === undefined || ECT < minECT[polygonId]) {
         	minECT[polygonId] = ECT;
     	}
@@ -185,17 +185,13 @@ try{
 		})
 		.then(function(data) {
 			L.geoJSON(data, {
-				style: {
-					color: 'red',
-					fillOpacity:0
-				},
 				onEachFeature: function (feature, moaLayer) {
-					moaLayer.bindPopup("<h3>"+feature.properties.NAME+"</h3>");
+					moaLayer.bindPopup("<h3>"+feature.properties.NAME+"</h3>"+"<br>"+feature.properties.TIMEOFUSE);
 				}
 			}).addTo(map).on('layeradd', function (event) {
 				var layer = event.layer;
 				if (layer.feature.geometry.type === 'Polygon') {
-					var polygonId = layer.feature.properties.id;
+					var polygonId = layer.feature.properties.OBJECTID;
 					var min = minECT[polygonId];
 					if (min !== undefined) {
 						if (min > 0) {
