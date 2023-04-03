@@ -87,6 +87,9 @@ L.realtime({
 
 //This pulls the MOAs and styles them with red borders with no fill-in! Downloaded from the FAA ArcGIS page 
 //as a .geoJSON file: https://adds-faa.opendata.arcgis.com/ 
+//The MOAs probably will not appear if you simply open 'index.html' in a web browser, as Chrome/Edge block files
+//from being utilized with addresses that aren't from a website (for safety reasons).
+//It will only show on GitHub or other hosted webpage.
 fetch("Special_Use_Airspace.geojson")
 	.then(function(response) {
 		return response.json();
