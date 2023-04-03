@@ -186,10 +186,6 @@ try{
 		})
 		.then(function(data) {
 			L.geoJSON(data, {
-				style: {
-					color: "red",
-					fillOpacity:0
-				},
 				onEachFeature: function (feature, moaLayer) {
 					moaLayer.bindPopup("<h3>"+feature.properties.NAME+"</h3>");
 				}
