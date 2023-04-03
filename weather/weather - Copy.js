@@ -33,7 +33,6 @@ var map = L.map('map', {
 	layers: [terrain, newObsGroup]
 }).setView([64.666, -147.101], 8);
 
-
 //This is where the script pulls the data from Synoptic (parent company of MesoWest). The URL defines the parameters of what is pulled.
 //Typical format is &[parameter]=[thing]. For instance, &units=metric sets the returned unit values to metric.
 //https://developers.synopticdata.com/mesonet/explorer/ lets you customize what the API delivers and gives you a custom URL automatically!
@@ -51,8 +50,6 @@ var map = L.map('map', {
 //Status: Active sensors only
 //State: Alaska (pulls all sensors in AK, can replace state with county, or other ranges)
 //Within: 1440 minutes (only pulls obs less than 24hrs old)
-
-var minECT = {};
 
 L.realtime({
 	url: 'https://api.synopticdata.com/v2/stations/latest?&token=7c0eab19bffc4221af1eaf73b4b1237e&timeformat=%TZ%n/%n%d-%b-%Y&obtimezone=utc&output=geojson&units=english&status=active&varsoperator=and&state=AK&within=1440',
@@ -146,11 +143,7 @@ L.realtime({
 
 		};
 
-		var polygonId = feature.properties.OBJECTID;
-    	if (minECT[polygonId] === undefined || ECT < minECT[polygonId]) {
-        	minECT[polygonId] = ECT;
-    	}
-	}
+    }
 });
 
 //The below defines the layers we can toggle on and off. By default, terrain and obs < 1hr old are turned on.
@@ -178,33 +171,25 @@ L.control.layers(null, obMarkers).addTo(map);
 //and they change the links all the time... It's all rather gross. If MOAs get updated, though, you'll
 //need to go re-download a new geojson from the link above and replace it.
 
-try{
-	fetch("Special_Use_Airspace.geojson")
-		.then(function(response) {
-			return response.json();
-		})
-		.then(function(data) {
-			L.geoJSON(data, {
-				onEachFeature: function (feature, moaLayer) {
-					moaLayer.bindPopup("<h3>"+feature.properties.NAME+"</h3>"+"<br>"+feature.properties.TIMEOFUSE);
-				}
-			}).addTo(map).on('layeradd', function (event) {
-				var layer = event.layer;
-				if (layer.feature.geometry.type === 'Polygon') {
-					var polygonId = layer.feature.properties.OBJECTID;
-					var min = minECT[polygonId];
-					if (min !== undefined) {
-						if (min > 0) {
-							layer.setStyle({color: 'green'});
-						} else if (min > -30) {
-							layer.setStyle({color: 'yellow'});
-						} else {
-							layer.setStyle({color: 'red'});
-						}
-					}
-				}
-			});
-		});
-} catch (error) {
-	window.alert("Error: " + error.message);
-};
+fetch("Special_Use_Airspace.geojson")
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(data) {
+		L.geoJSON(data, {
+			style: {
+				color: "red",
+				fillOpacity:0
+			},
+			onEachFeature: function (feature, moaLayer) {
+				moaLayer.bindPopup("<h3>"+feature.properties.NAME+"</h3>");
+			}
+		}).addTo(map);
+});
+
+var isMarkerInPolygon = L.GeometryUtil.geodesicIsInside(newObs.getLatLng(), moaLayer.toGeoJSON().features[0]);
+if (isMarkerInPolygon) {
+  console.log('Marker is inside the GeoJSON polygon');
+} else {
+  console.log('Marker is outside the GeoJSON polygon');
+}
