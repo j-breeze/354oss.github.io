@@ -186,10 +186,3 @@ fetch("Special_Use_Airspace.geojson")
 			}
 		}).addTo(map);
 });
-
-var isMarkerInPolygon = L.GeometryUtil.geodesicIsInside(newObs.getLatLng(), moaLayer.toGeoJSON().features[0]);
-if (isMarkerInPolygon) {
-  console.log('Marker is inside the GeoJSON polygon');
-} else {
-  console.log('Marker is outside the GeoJSON polygon');
-}
